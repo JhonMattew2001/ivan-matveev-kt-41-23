@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using IvanMatveevKT_41_23.Database;
 using NLog;
 using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<EducationDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString(
+            "DefaultConnection")));
 
 var logger = LogManager
     .Setup()
